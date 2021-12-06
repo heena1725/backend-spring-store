@@ -14,12 +14,18 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/user/{id}")
-    public User getUser(@PathVariable String id){
+    public User getUser(@PathVariable String id) {
         return userService.getUser(id);
     }
 
     @PutMapping("/user")
-    public List<User> updateUser(@RequestBody User user){
+    public List<User> updateUser(@RequestBody User user) {
         return userService.updateUser(user);
+    }
+
+    @CrossOrigin
+    @PostMapping("/user")
+    public List<User> addUser(@RequestBody User user) {
+        return userService.addUser(user);
     }
 }

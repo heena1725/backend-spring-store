@@ -20,4 +20,11 @@ public class UserServiceImpl implements UserService {
         userDao.save(user);
         return userDao.findAll();
     }
+
+    @Override
+    public List<User> addUser(User user) {
+        if(userDao.existsById(user.getUserId()))return userDao.findAll();
+        userDao.save(user);
+        return userDao.findAll();
+    }
 }

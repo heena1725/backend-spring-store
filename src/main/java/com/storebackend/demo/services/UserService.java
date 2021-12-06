@@ -9,4 +9,6 @@ public interface UserService {
     User getUser(String id);
 
     List<User> updateUser(User user);
+
+    List<User> addUser(User user);
 }
