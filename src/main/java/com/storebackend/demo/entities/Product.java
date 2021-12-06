@@ -1,14 +1,23 @@
 package com.storebackend.demo.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Product {
 
+    @Id
     private long id;
-    private String title;
+    private String name;
+    private int price;
+    private String dateOfManufacture;
     private String description;
 
-    public Product(long id, String title, String description) {
+    public Product(long id, String name, int price, String dateOfManufacture, String description) {
         this.id = id;
-        this.title = title;
+        this.name = name;
+        this.price = price;
+        this.dateOfManufacture = dateOfManufacture;
         this.description = description;
     }
 
@@ -23,12 +32,28 @@ public class Product {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getDateOfManufacture() {
+        return dateOfManufacture;
+    }
+
+    public void setDateOfManufacture(String dateOfManufacture) {
+        this.dateOfManufacture = dateOfManufacture;
     }
 
     public String getDescription() {
@@ -43,7 +68,9 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", dateOfManufacture='" + dateOfManufacture + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

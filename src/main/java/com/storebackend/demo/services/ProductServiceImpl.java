@@ -1,6 +1,8 @@
 package com.storebackend.demo.services;
 
+import com.storebackend.demo.dao.ProductDao;
 import com.storebackend.demo.entities.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,50 +10,40 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
-    List<Product> list;
+    @Autowired
+    private ProductDao productDao;
 
     public ProductServiceImpl() {
-        list = new ArrayList<>();
-        list.add(new Product(10, "Hello", "there"));
-        list.add(new Product(10, "Hello", "there"));
+
     }
 
     @Override
     public List<Product> getProducts() {
-        return list;
+        return productDao.findAll();
     }
 
     @Override
     public Product getProduct(long productId) {
-        for (Product product : list) {
-            if(product.getId() == productId){
-                return product;
-            }
-        }
-        return null;
+        return productDao.getById(productId);
     }
 
     @Override
     public Product addProduct(Product product) {
-        list.add(product);
+        productDao.save(product);
         return product;
     }
 
     @Override
     public Product updateProduct(Product product) {
-        list.forEach(ele -> {
-            if(ele.getId() == product.getId()){
-                ele.setTitle(product.getTitle());
-                ele.setDescription(product.getDescription());
-            }
-        });
+        productDao.save(product);
         return product;
     }
 
     @Override
     public void deleteProduct(long productId) {
-        list = list.stream().filter(ele -> ele.getId() != productId).collect(Collectors.toList());
+        Product entity = productDao.getById(productId);
+        productDao.delete(entity);
     }
 }
